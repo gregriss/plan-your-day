@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/style/style.css"/>
     <title>Work Day Scheduler</title>
   </head>
 
@@ -45,7 +45,7 @@
       <div class="timeblock description row past">
         <textarea></textarea>
       </div>
-      <div class="hour">12m</div>
+      <div class="hour">12pm</div>
       <button class="saveBtn row">Save</button>
       <div class="timeblock description row past">
         <textarea></textarea>
@@ -75,9 +75,16 @@
       <div class="timeblock description row future">
         <textarea></textarea>
       </div>
-      <!-- Timeblocks go here -->
+      
     </div>
     <script>
+
+      $(function(){
+        
+        $("#currentDay").text(new Date().getHours());
+        
+      });
+      
       // Anthony's HW setup is in last 15 min of Tuesday's jQuery class
 
 
