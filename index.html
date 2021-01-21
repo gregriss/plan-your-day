@@ -20,6 +20,8 @@
     />
     <link rel="stylesheet" href="assets/style/style.css"/>
     <title>Work Day Scheduler</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   </head>
 
   <body>
@@ -30,75 +32,140 @@
     </header>
     <div class="container">
 
-      <div class="hour">9am</div>
+      <span class="hour">9am</span>
       <button class="saveBtn row">Save</button>
       <div class="timeblock description row past">
-        <textarea></textarea>
+        <textarea id="9-task" class="task">
+        </textarea>
       </div>
-      <div class="hour">10am</div>
+
+      <span class="hour">10am</span>
       <button class="saveBtn row">Save</button>
       <div class="timeblock description row past">
-        <textarea></textarea>
+        <textarea id="10-task" class="task">
+        </textarea>
       </div>
-      <div class="hour">11am</div>
+
+      <span class="hour">11am</span>
       <button class="saveBtn row">Save</button>
       <div class="timeblock description row past">
-        <textarea></textarea>
+        <textarea id="11-task" class="task">
+        </textarea>
       </div>
-      <div class="hour">12pm</div>
+
+      <span class="hour">12pm</span>
       <button class="saveBtn row">Save</button>
       <div class="timeblock description row past">
-        <textarea></textarea>
+        <textarea id="12-task" class="task">
+        </textarea>
       </div>
-      <div class="hour">1pm</div>
+
+      <span class="hour">1pm</span>
       <button class="saveBtn row">Save</button>
       <div class="timeblock description row past">
-        <textarea></textarea>
+        <textarea id="13-task" class="task">
+        </textarea>
       </div>
-      <div class="hour">2pm</div>
+
+      <span class="hour">2pm</span>
       <button class="saveBtn row">Save</button>
       <div class="timeblock description row present">
-        <textarea></textarea>
+        <textarea id="14-task" class="task">
+        </textarea>
       </div>
-      <div class="hour">3pm</div>
+
+      <span class="hour">3pm</span>
       <button class="saveBtn row">Save</button>
       <div class="timeblock description row future">
-        <textarea></textarea>
+        <textarea id="15-task" class="task">
+        </textarea>
       </div>
-      <div class="hour">4pm</div>
+
+      <span class="hour">4pm</span>
       <button class="saveBtn row">Save</button>
       <div class="timeblock description row future">
-        <textarea></textarea>
+        <textarea id="16-task" class="task">
+        </textarea>
       </div>
-      <div class="hour">5pm</div>
+
+      <span class="hour">5pm</span>
       <button class="saveBtn row">Save</button>
       <div class="timeblock description row future">
-        <textarea></textarea>
+        <textarea id="17-task" class="task">
+        </textarea>
       </div>
-      
     </div>
     <script>
-
-      $(function(){
-        
-        $("#currentDay").text(new Date().getHours());
-        
-      });
-      
-      // Anthony's HW setup is in last 15 min of Tuesday's jQuery class
-
-
       // GIVEN I am using a daily planner to create a schedule
       // WHEN I open the planner
       // THEN the current day is displayed at the top of the calendar
+      
+      // declaring variable to store a function to retrieve today's date
+      var currentTime = new Date();
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      var hours =
+      // waiting until html page loads to run jQuery script
+      $(document).ready (function(){
+        // displaying current time in the currentDay paragraph 
+        $("#currentDay").text(days[(new Date()).getDay()] + ", " + months[(new Date()).getMonth()] + " " + new Date().getDate());
+        
+        // currentTime.getHours();
+        var timeblocks = [
+          {
+            hour: "9am",
+            tasks: "",
+           },
+           {
+             hour: "10am",
+             tasks: "",
+            },
+            {
+              hour: "11am",
+              tasks: "",
+            },
+            {
+              hour: "12pm",
+              tasks: "",
+            },
+            {
+              hour: "1pm",
+              tasks: "",
+             },
+             {
+               hour: "2pm",
+               tasks: "",
+             },
+             {
+               hour: "3pm",
+               tasks: "",
+             },
+             {
+               hour: "4pm",
+               tasks: "",
+             },
+             {
+               hour: "5pm",
+               tasks: ""
+             } 
+            ];
+        // timeblocksIndex = 0;
+        
+        // for (var i = 0; i < timeblocks.length; i++){
+        //   console.log(timeblocks[i].hour);
+        //   $(".hour").text(timeblocks[i].hour);
+        // }
+      // Anthony's HW setup is in last 15 min of Tuesday's jQuery class
+
       // (new Date()).getHours()
 
       // WHEN I scroll down
       // THEN I am presented with time blocks for standard business hours
-      // 9am-5pm
+      // 9am-5pm (Time blocks created above)
 
       // WHEN I view the time blocks for that day
       // THEN each time block is color-coded to indicate whether it is in the past, present, or future
+     
       // (new Date()).getHours() ... but jQuery version, to check current hour
 
       // hours passed should be gray
@@ -120,9 +187,8 @@
       // WHEN I refresh the page
       // THEN the saved events persist
       // (local storage works properly)
-
+        });
       </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    
   </body>
 </html>
