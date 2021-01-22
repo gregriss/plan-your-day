@@ -90,15 +90,8 @@
             ];
         // timeblocksIndex = 0;
         var container = $(".container");
-        // for (var i = 0; i < timeblocks.length; i++){
-          // console.log(timeblocks[i].hour);
-            // create span for hour
-          // var timeSpan = $("<span>");
-            // adding text of hour from timeblock object
-          // timeSpan.text(timeblocks[i].hour);
-          // chosenTag.attr("float", left);
-          // container.append(timeSpan);
-        // }
+        var saveBtn = $(".saveBtn");
+        
       // Anthony's HW setup is in last 15 min of Tuesday's jQuery class
 
       // (new Date()).getHours()
@@ -122,10 +115,12 @@
 
         for (var i = 0; i < timeblocks.length; i++) {
 
+
+        // I need to restructure this to have each span, time-block div, and button in a row
+        // with col class set to designate proper proportions (span col-2, div col-10, button col-2 for example);
           var s = $("<span>");
             s.addClass("hour");
             s.addClass("row");
-            // s.css(["float", "left"]);
             s.text(timeblocks[i].hour);
             container.append(s);
 
@@ -134,7 +129,6 @@
             b.text("Save");
             b.addClass("row");
             b.attr("data-index");
-            // b.css(["float", "left"]);
             container.append(b);
             
             // creating divs for each timeblock
@@ -164,37 +158,50 @@
               textArea.addClass("row")
               // attaching textareas to their parent div elements
               d.append(textArea);
-          
         }
       }
       // calling render function
       renderTimeblocks();
 
 
-      
-
-      
-      // hours passed should be gray
-      // current hour should be red
-          // if(i === 12){
-          //   chosenTag.css(["background-color", "red"]);
-          //   chosenTag.addClass("red-class");
-          // }
-          // if((new Date()).getHours() === i){ // uses military time 0-23 for hours
-          //   chosenTag.addClass("red-class");
-          // }
-      // future hours should be green
+            // hours passed should be gray
+            // current hour should be red
+            //     if(i === 12){
+            //       chosenTag.css(["background-color", "red"]);
+            //       chosenTag.addClass("red-class");
+            //     }
+            //     if((new Date()).getHours() === i){ // uses military time 0-23 for hours
+            //       chosenTag.addClass("red-class");
+            //     }
+            // future hours should be green
 
       // WHEN I click into a time block
       // THEN I can enter an event
+      // create text areas for each time-block
+
       // WHEN I click the save button for that time block
       // THEN the text for that event is saved in local storage
-      // need an .on("click") event for each save button 
+
+      // need an .on("click") event for save buttons (or one click event with (this))
+      $(".saveBtn").on("click", function() {
+        // logging the button I clicked on
+        console.log(this);
+        // making a variable 
+        var clickSave = $(this).attr("data-index");
+        // next, add to local storage (look at array of objects timeblocks i made above, see if I can use that)
+      })
 
       // WHEN I refresh the page
       // THEN the saved events persist
       // (local storage works properly)
+
+      
         });
+
+
+      // in textarea associated with $(this)...using 
+      // want to us (this) keyword to identify which save button you're clicking
+      // that way, you don't need a new click event for each button
       </script>
     
   </body>
