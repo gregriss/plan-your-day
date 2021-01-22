@@ -149,7 +149,7 @@
           }
           // hours in the future will have the class "future", colored green
           if (currentHour < (i + 9)) {
-            d.addClass("future");
+            block.addClass("future");
             wrap.append(block);
           }
           // creating text area for each div, to type tasks into
@@ -164,12 +164,17 @@
           // assigning the class saveBtn
           b.addClass("saveBtn");
           // giving each block a label that says "Save"
-          b.text("Save");
+          // b.text("Save");
+          
           b.addClass("row");
-          b.addClass("col-1.5");
+          b.addClass("col-1");
 
           b.attr("data-index", timeblocks[i].hour);
           wrap.append(b);
+
+          var saveImg = $("<img>");
+          saveImg.attr("src", "assets/images/save-white.png");
+          b.append(saveImg);
         }
 
       }
