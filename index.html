@@ -105,52 +105,49 @@
         container.empty();
 
         for (var i = 0; i < timeblocks.length; i++) {
-
-
-          // I need to restructure this to have each span, time-block div, and button in a row
-          // with col class set to designate proper proportions (span col-2, div col-10, button col-2 for example);
+          // making a div for each set of time block elements 
           var wrap = $("<div>");
-
+          // giving the div a class of wrap and row
           wrap.addClass("wrap");
           wrap.addClass("row");
-          wrap.addClass("time-block");
+          // appending the wrap divs to the larger container div
           container.append(wrap);
 
+          // creating a span for each hour with classes hour, row, and col-1.5
           var s = $("<span>");
           s.addClass("hour");
           s.addClass("row");
           s.addClass("col-1.5");
-
+          // giving span elements the text of the workday hours
           s.text(timeblocks[i].hour);
-          // container.append(s)
+          // appending to the wrap div
           wrap.prepend(s);
 
           // creating divs for each timeblock
           var block = $("<div>");
 
-          // adding classes for time-block and row
+          // adding classes for time-block, row, and col-9 (column 3/4 the width of the screen)
           block.addClass("time-block");
           block.addClass("row");
           block.addClass("col-9");
+          // appending time block to corresponding wrap div
           wrap.append(block);
-
 
           // current hour will have the class "present", colored red
           if (currentHour === (i + 9)) {
             block.addClass("present");
-            wrap.append(block);
+            // wrap.append(block);
           }
           // hours in the past will have the class "past", colored gray
           if (currentHour > (i + 9)) {
             block.addClass("past");
-            // attaching div to container
-            wrap.append(block);
 
+            // wrap.append(block);
           }
           // hours in the future will have the class "future", colored green
           if (currentHour < (i + 9)) {
             block.addClass("future");
-            wrap.append(block);
+            // wrap.append(block);
           }
           // creating text area for each div, to type tasks into
           var textArea = $("<textarea>");
@@ -161,22 +158,22 @@
 
           // adding buttons for each time block
           var b = $("<button>");
-          // assigning the class saveBtn
+          // assigning the classes saveBtn, row, and col-1 (1/12 width of window)
           b.addClass("saveBtn");
-          // giving each block a label that says "Save"
-          // b.text("Save");
-          
           b.addClass("row");
           b.addClass("col-1");
-
+          // assigning each save button a data-index to connect it with corresponding work hour
           b.attr("data-index", timeblocks[i].hour);
           wrap.append(b);
-
+          
+          // creating an image tag and assigning it to a variable named saveImg
           var saveImg = $("<img>");
+          // assigning save icon to the img tag, adding alt text of "Save Icon"
           saveImg.attr("src", "assets/images/save-white.png");
+          saveImg.attr("alt", "Save Icon");
+          // appending save image to each button 
           b.append(saveImg);
         }
-
       }
       // calling render function
       renderTimeblocks();
@@ -195,7 +192,7 @@
 
       // WHEN I click into a time block
       // THEN I can enter an event
-      // create text areas for each time-block
+      // create text areas for each time-block (DONE)
 
       // WHEN I click the save button for that time block
       // THEN the text for that event is saved in local storage
@@ -207,6 +204,7 @@
         // making a variable 
         var clickSave = $(this).attr("data-index");
         // next, add to local storage (look at array of objects timeblocks i made above, see if I can use that)
+        // var userInput = ... not done yet
       })
 
       // WHEN I refresh the page
