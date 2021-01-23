@@ -33,7 +33,7 @@
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-    
+
     // waiting until html page loads to run jQuery script
     $(document).ready(function () {
       // displaying current time in the currentDay paragraph 
@@ -79,18 +79,18 @@
           hour: "5pm",
         }
       ];
-      
+
       var container = $(".container");
       var saveBtn = $(".saveBtn");
 
       // creating a variable named allTodos and assigning it an empty array where todo items will be stored
       var allTodos = [];
-      
+
       // function to create the planner elements dynamically with jQuery
       function renderTimeblocks() {
         // making sure the container div is empty before starting for loop
         container.empty();
-        
+
         for (var i = 0; i < timeblocks.length; i++) {
           // making a div for each set of time block elements 
           var wrap = $("<div>");
@@ -137,7 +137,7 @@
             block.addClass("future");
             // wrap.append(block);
           }
-          
+
           // adding buttons for each time block
           var b = $("<button>");
           // assigning the classes saveBtn, row, and col-1 (1/12 width of window)
@@ -148,7 +148,7 @@
           b.attr("data-index", timeblocks[i].hour);
           b.attr("value", i);
           wrap.append(b);
-          
+
           // creating an image tag and assigning it to a variable named saveImg
           var saveImg = $("<img>");
           // adding the class saveImg to the variable saveImg
@@ -166,7 +166,7 @@
           saveImgBlk.attr("alt", "Save Icon Hover");
           // appending the image to each button
           b.append(saveImgBlk);
-          
+
           // creating text area for each div, to type tasks into
           var textArea = $("<textarea>");
           textArea.addClass("row")
@@ -179,8 +179,8 @@
             // setting the todos items as the text for corresponding timeblock text area
             textArea.text(allTodos[i]);
             // console.log(allTodos[i]);
-          // attaching textareas to their parent div elements
-          block.append(textArea);
+            // attaching textareas to their parent div elements
+            block.append(textArea);
           }
           else {
             block.append(textArea);
@@ -191,7 +191,7 @@
       // after textarea elements are created, getting All Todos from local storage
       renderTimeblocks();
 
-      $(".saveBtn").on("click", function(event){
+      $(".saveBtn").on("click", function (event) {
         event.stopPropagation();
         // console.log(this);
 
@@ -199,33 +199,16 @@
         var arrayIndex = $(this).attr("value");  // getting array numbr
         var userInput = allTodos[index];
         var newTask = $(userInput).val();
-        allTodos[arrayIndex] = $("#"+ index).val(); // setting value of array to the text
+        allTodos[arrayIndex] = $("#" + index).val(); // setting value of array to the text
         // allTodos[i] = $("#"+ index).val();
         console.log(allTodos[arrayIndex]);
         console.log(allTodos);
-        
+
         // console.log(todo9);
         console.log(index);
         // localStorage.setItem(index, currentTodo);
         localStorage.setItem("All Todos", JSON.stringify(allTodos));
-      }); 
-      
-      
-
-      //   // var clickSave = $(this).attr("data-index");
-      //   if ($(this).attr("data-index") === "9am") {
-      //     // console.log($("#9am").text());
-      //     var task9am = $("#9am").text();
-
-      //     timeblocks[0].tasks.value = ($("#9am").text());
-      //     localStorage.setItem("9am Task", JSON.stringify(task9am));
-      //   }
-
-      
-      // WHEN I refresh the page
-      // THEN the saved events persist
-      // (local storage works properly)
-    
+      });
 
     });
   </script>
