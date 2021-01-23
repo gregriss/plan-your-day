@@ -10,10 +10,13 @@ The calendar below breaks the workday into hourly time blocks, and provides a pl
 
 ## Usage
 
-Click on a block to type in an item, and click the corresponding save button on the right side of the block to store what you entered. When you come back to the page, the items you've entered will still be there for your reference.
+Click on a block to type in an item, and click the corresponding save button on the right side of the block to store what you entered. When you come back to the page, the items you've entered will remain there for your convenience.
 
 Provided that the time is before 8am, the page will appear like so:
 ![Start](assets/images/home.png)
+
+Between 2pm and 3pm, when you've entered several items, clicked save, and refreshed the page, the app might look like this:
+![In-Use](assets/images/planner-in-use.png)
 
 ## License 
 

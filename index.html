@@ -53,56 +53,43 @@
       var timeblocks = [
         {
           hour: "9am",
-          // todo9 
         },
         {
           hour: "10am",
-          // todo10 
         },
         {
           hour: "11am",
-          // todo11 
         },
         {
           hour: "12pm",
-          // todo12: $("#12pm").text()
         },
         {
           hour: "1pm",
-          // todo1: $("#1pm").text()
         },
         {
           hour: "2pm",
-          // todo2: $("#2pm").text()
         },
         {
           hour: "3pm",
-          // todo3: $("#3pm").text()
         },
         {
           hour: "4pm",
-          // todo4: $("#4pm").text()
         },
         {
           hour: "5pm",
-          // todo5: $("#5pm").text()
         }
       ];
       
       var container = $(".container");
       var saveBtn = $(".saveBtn");
 
+      // creating a variable named allTodos and assigning it an empty array where todo items will be stored
       var allTodos = [];
-      // allTodos = [todo9, todo10, todo11, todo12, todo1, todo2, todo3, todo4, todo5];
       
       // function to create the planner elements dynamically with jQuery
       function renderTimeblocks() {
+        // making sure the container div is empty before starting for loop
         container.empty();
-        // if (localStorage.getItem("All Todos") !== null) {
-        // // localStorage.getItem("Tasks", JSON.parse(allTodos));
-        // allTodos = JSON.parse(localStorage.getItem("All Todos"));
-
-        // }
         
         for (var i = 0; i < timeblocks.length; i++) {
           // making a div for each set of time block elements 
@@ -200,29 +187,21 @@
           }
         }
       }
-      
-      // WHEN I click into a time block
-      // THEN I can enter an event
-      
-      // WHEN I click the save button for that time block
-      // THEN the text for that event is saved in local storage
-
-      
-      // calling render function
-      
+      // calling render function to create html elements 
+      // after textarea elements are created, getting All Todos from local storage
       renderTimeblocks();
 
       $(".saveBtn").on("click", function(event){
         event.stopPropagation();
-        console.log(this);
+        // console.log(this);
 
         var index = $(this).attr("data-index");
         var arrayIndex = $(this).attr("value");  // getting array numbr
-        var userInput = allTodos[index]
-        var newTask = $(userInput).val()
+        var userInput = allTodos[index];
+        var newTask = $(userInput).val();
         allTodos[arrayIndex] = $("#"+ index).val(); // setting value of array to the text
         // allTodos[i] = $("#"+ index).val();
-        console.log(allTodos[arrayIndex])
+        console.log(allTodos[arrayIndex]);
         console.log(allTodos);
         
         // console.log(todo9);
@@ -230,10 +209,8 @@
         // localStorage.setItem(index, currentTodo);
         localStorage.setItem("All Todos", JSON.stringify(allTodos));
       }); 
-      // {
-      //   // logging the button I clicked on
-      //   console.log(this);
-      //   // making a var
+      
+      
 
       //   // var clickSave = $(this).attr("data-index");
       //   if ($(this).attr("data-index") === "9am") {
@@ -244,41 +221,6 @@
       //     localStorage.setItem("9am Task", JSON.stringify(task9am));
       //   }
 
-
-      //   // else if ($(this).attr("data-index") === "9am") {
-          
-      //   // }
-      //   // else if ($(this).attr("data-index") === "10am") {
-          
-      //   // }
-      //   // else if ($(this).attr("data-index") === "11am") {
-          
-      //   // }
-      //   // else if ($(this).attr("data-index") === "12pm") {
-          
-      //   // }
-      //   // else if ($(this).attr("data-index") === "1pm") {
-          
-      //   // }
-      //   // else if ($(this).attr("data-index") === "2pm") {
-          
-      //   // }
-      //   // else if ($(this).attr("data-index") === "3pm") {
-          
-      //   // }
-      //   // else if ($(this).attr("data-index") === "4pm") {
-          
-      //   // }
-      //   // else if ($(this).attr("data-index") === "5pm") {
-          
-      //   // }
-      //   // timeblocks.tasks = textArea.textContent;
-      //   // next, add to local storage (look at array of objects timeblocks i made above, see if I can use that)
-      //   // var userInput = ... not done yet
-      //   $("#10am").on("click", function(){
-      //     console.log(this);
-      //   })
-      // });
       
       // WHEN I refresh the page
       // THEN the saved events persist
@@ -286,18 +228,6 @@
     
 
     });
-
-    //     if(i === 12){
-      //       chosenTag.css(["background-color", "red"]);
-      //       chosenTag.addClass("red-class");
-      //     }
-      //     if((new Date()).getHours() === i){ // uses military time 0-23 for hours
-      //       chosenTag.addClass("red-class");
-      //     }
-
-      // in textarea associated with $(this)...using 
-      // want to us (this) keyword to identify which save button you're clicking
-      // that way, you don't need a new click event for each button
   </script>
 
 </body>
