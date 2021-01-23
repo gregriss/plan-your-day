@@ -86,6 +86,7 @@ textarea{
   position: absolute;
   transition: all .3s ease-in-out;
 }
+
 .saveImg:hover {
   opacity: 0;
 }

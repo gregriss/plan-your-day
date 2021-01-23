@@ -40,67 +40,69 @@
       $("#currentDay").text(days[(new Date()).getDay()] + ", " + months[(new Date()).getMonth()] + " " + new Date().getDate());
 
       // var myTasks = ["","","","","","","","",""];
-      var todo9 = $("#9am").text();
-      var todo10 = $("#10am").text();
-      var todo11 = $("#11am").text();
-      var todo12 = $("#12pm").text();
-      var todo1 = $("#1pm").text();
-      var todo2 = $("#2pm").text();
-      var todo3 = $("#3pm").text();
-      var todo4 = $("#4pm").text();
-      var todo5 = $("#5pm").text();
+      // var todo9 = $("#9am").text();
+      // var todo10 = $("#10am").text();
+      // var todo11 = $("#11am").text();
+      // var todo12 = $("#12pm").text();
+      // var todo1 = $("#1pm").text();
+      // var todo2 = $("#2pm").text();
+      // var todo3 = $("#3pm").text();
+      // var todo4 = $("#4pm").text();
+      // var todo5 = $("#5pm").text();
 
       var timeblocks = [
         {
           hour: "9am",
-          todo9: $("#9am").text()
+          // todo9 
         },
         {
           hour: "10am",
-          todo10: $("#10am").text()
+          // todo10 
         },
         {
           hour: "11am",
-          todo11: $("#11am").text()
+          // todo11 
         },
         {
           hour: "12pm",
-          todo12: $("#12pm").text()
+          // todo12: $("#12pm").text()
         },
         {
           hour: "1pm",
-          todo1: $("#1pm").text()
+          // todo1: $("#1pm").text()
         },
         {
           hour: "2pm",
-          todo2: $("#2pm").text()
+          // todo2: $("#2pm").text()
         },
         {
           hour: "3pm",
-          todo3: $("#3pm").text()
+          // todo3: $("#3pm").text()
         },
         {
           hour: "4pm",
-          todo4: $("#4pm").text()
+          // todo4: $("#4pm").text()
         },
         {
           hour: "5pm",
-          todo5: $("#5pm").text()
+          // todo5: $("#5pm").text()
         }
       ];
       
       var container = $(".container");
       var saveBtn = $(".saveBtn");
 
-      allTodos = [todo9, todo10, todo11, todo12, todo1, todo2, todo3, todo4, todo5];
+      var allTodos = [];
+      // allTodos = [todo9, todo10, todo11, todo12, todo1, todo2, todo3, todo4, todo5];
       
       // function to create the planner elements dynamically with jQuery
       function renderTimeblocks() {
         container.empty();
-        if (localStorage.getItem("Tasks") !== null) {
-        localStorage.getItem("Tasks", JSON.parse(allTodos));
-        
-        }
+        // if (localStorage.getItem("All Todos") !== null) {
+        // // localStorage.getItem("Tasks", JSON.parse(allTodos));
+        // allTodos = JSON.parse(localStorage.getItem("All Todos"));
+
+        // }
         
         for (var i = 0; i < timeblocks.length; i++) {
           // making a div for each set of time block elements 
@@ -148,15 +150,7 @@
             block.addClass("future");
             // wrap.append(block);
           }
-          // creating text area for each div, to type tasks into
-          var textArea = $("<textarea>");
-          textArea.addClass("row")
-          textArea.addClass("col-12");
-          textArea.attr("id", timeblocks[i].hour);
-          textArea.text(allTodos[i]);
-          // attaching textareas to their parent div elements
-          block.append(textArea);
-
+          
           // adding buttons for each time block
           var b = $("<button>");
           // assigning the classes saveBtn, row, and col-1 (1/12 width of window)
@@ -165,6 +159,7 @@
           b.addClass("col-1.5");
           // assigning each save button a data-index to connect it with corresponding work hour
           b.attr("data-index", timeblocks[i].hour);
+          b.attr("value", i);
           wrap.append(b);
           
           // creating an image tag and assigning it to a variable named saveImg
@@ -184,9 +179,27 @@
           saveImgBlk.attr("alt", "Save Icon Hover");
           // appending the image to each button
           b.append(saveImgBlk);
+          
+          // creating text area for each div, to type tasks into
+          var textArea = $("<textarea>");
+          textArea.addClass("row")
+          textArea.addClass("col-12");
+          textArea.attr("id", timeblocks[i].hour);
+          // checking if All Todos exists yet in local storage
+          if (localStorage.getItem("All Todos")) {
+            // parsing local storage values 
+            allTodos = JSON.parse(localStorage.getItem("All Todos"));
+            // setting the todos items as the text for corresponding timeblock text area
+            textArea.text(allTodos[i]);
+            // console.log(allTodos[i]);
+          // attaching textareas to their parent div elements
+          block.append(textArea);
+          }
+          else {
+            block.append(textArea);
+          }
         }
       }
-      // calling render function
       
       // WHEN I click into a time block
       // THEN I can enter an event
@@ -194,27 +207,29 @@
       // WHEN I click the save button for that time block
       // THEN the text for that event is saved in local storage
 
-      // function saveTasks() {
-      //   var index = $(this).attr("data-index");
-      //   var whichTask = timeblocks[index];
-      //   var newTask = $(whichTask).val()
-      //   myTasks[index] = newTask;
-      //   localStorage.setItem("Tasks", JSON.stringify(timeblocks));
-      // };
-
-
-      $(".saveBtn").on("click", function(){
-        event.stopPropagation();
-        console.log(this);
-        var index = $(this).attr("data-index");
-        var whichTask = allTodos[index];
-        var newTask = $(whichTask).val()
-        allTodos[index] = newTask;
-        localStorage.setItem("Tasks", JSON.stringify(allTodos));
-      }); 
-
+      
+      // calling render function
       
       renderTimeblocks();
+
+      $(".saveBtn").on("click", function(event){
+        event.stopPropagation();
+        console.log(this);
+
+        var index = $(this).attr("data-index");
+        var arrayIndex = $(this).attr("value");  // getting array numbr
+        var userInput = allTodos[index]
+        var newTask = $(userInput).val()
+        allTodos[arrayIndex] = $("#"+ index).val(); // setting value of array to the text
+        // allTodos[i] = $("#"+ index).val();
+        console.log(allTodos[arrayIndex])
+        console.log(allTodos);
+        
+        // console.log(todo9);
+        console.log(index);
+        // localStorage.setItem(index, currentTodo);
+        localStorage.setItem("All Todos", JSON.stringify(allTodos));
+      }); 
       // {
       //   // logging the button I clicked on
       //   console.log(this);
