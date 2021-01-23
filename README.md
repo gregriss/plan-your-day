@@ -10,7 +10,8 @@ The calendar below breaks the workday into hourly time blocks, and provides a pl
 
 ## Usage
 
-Click on a block to type in an item, and click the corresponding save button on the right side of the block to store what you entered. When you come back to the page, the items you've entered will remain there for your convenience.
+Click on a block to type in an item, and click the corresponding save button on the right side of the block to store what you entered. When you come back to the page, the items you've entered will remain there for your convenience. Check out the deployed page here: 
+https://gregriss.github.io/plan-your-day/
 
 Provided that the time is before 8am, the page will appear like so:
 ![Start](assets/images/home.png)
