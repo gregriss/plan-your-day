@@ -22,94 +22,93 @@
     <p id="currentDay" class="lead"></p>
   </header>
   <div class="container">
-
-
+    <!-- Timeblocks created in jQuery will appear here -->
   </div>
   <script>
-    // GIVEN I am using a daily planner to create a schedule
-    // WHEN I open the planner
-    // THEN the current day is displayed at the top of the calendar
-
     // declaring variable to store a function to retrieve today's date
     var currentTime = new Date();
+    // declaring a variable defining the current hour
+    var currentHour = currentTime.getHours();
+    // declaring functions to define months and days, so that the Date displays properly on the page.
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+    
     // waiting until html page loads to run jQuery script
     $(document).ready(function () {
       // displaying current time in the currentDay paragraph 
       $("#currentDay").text(days[(new Date()).getDay()] + ", " + months[(new Date()).getMonth()] + " " + new Date().getDate());
 
+      // var myTasks = ["","","","","","","","",""];
+      var todo9 = $("#9am").text();
+      var todo10 = $("#10am").text();
+      var todo11 = $("#11am").text();
+      var todo12 = $("#12pm").text();
+      var todo1 = $("#1pm").text();
+      var todo2 = $("#2pm").text();
+      var todo3 = $("#3pm").text();
+      var todo4 = $("#4pm").text();
+      var todo5 = $("#5pm").text();
 
       var timeblocks = [
         {
           hour: "9am",
-          tasks: "",
+          todo9: $("#9am").text()
         },
         {
           hour: "10am",
-          tasks: "",
+          todo10: $("#10am").text()
         },
         {
           hour: "11am",
-          tasks: "",
+          todo11: $("#11am").text()
         },
         {
           hour: "12pm",
-          tasks: "",
+          todo12: $("#12pm").text()
         },
         {
           hour: "1pm",
-          tasks: "",
+          todo1: $("#1pm").text()
         },
         {
           hour: "2pm",
-          tasks: "",
+          todo2: $("#2pm").text()
         },
         {
           hour: "3pm",
-          tasks: "",
+          todo3: $("#3pm").text()
         },
         {
           hour: "4pm",
-          tasks: "",
+          todo4: $("#4pm").text()
         },
         {
           hour: "5pm",
-          tasks: ""
+          todo5: $("#5pm").text()
         }
       ];
-      // timeblocksIndex = 0;
+      
       var container = $(".container");
       var saveBtn = $(".saveBtn");
 
-      // Anthony's HW setup is in last 15 min of Tuesday's jQuery class
-
-      // (new Date()).getHours()
-
-      // WHEN I scroll down
-      // THEN I am presented with time blocks for standard business hours
-      // 9am-5pm (Time blocks created above)
-
-      // WHEN I view the time blocks for that day
-      // THEN each time block is color-coded to indicate whether it is in the past, present, or future
-
-      // array of all hours shown on calendar in 24-hr time
-      var workHours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
-      // defining the current hour
-      var currentHour = currentTime.getHours();
-
-      // (new Date()).getHours() ... but jQuery version, to check current hour
-
+      allTodos = [todo9, todo10, todo11, todo12, todo1, todo2, todo3, todo4, todo5];
+      
+      // function to create the planner elements dynamically with jQuery
       function renderTimeblocks() {
         container.empty();
-
+        if (localStorage.getItem("Tasks") !== null) {
+        localStorage.getItem("Tasks", JSON.parse(allTodos));
+        
+        }
+        
         for (var i = 0; i < timeblocks.length; i++) {
           // making a div for each set of time block elements 
           var wrap = $("<div>");
           // giving the div a class of wrap and row
           wrap.addClass("wrap");
           wrap.addClass("row");
+          wrap.addClass("data-index", timeblocks[i].hour);
           // appending the wrap divs to the larger container div
           container.append(wrap);
 
@@ -153,6 +152,8 @@
           var textArea = $("<textarea>");
           textArea.addClass("row")
           textArea.addClass("col-12");
+          textArea.attr("id", timeblocks[i].hour);
+          textArea.text(allTodos[i]);
           // attaching textareas to their parent div elements
           block.append(textArea);
 
@@ -161,59 +162,123 @@
           // assigning the classes saveBtn, row, and col-1 (1/12 width of window)
           b.addClass("saveBtn");
           b.addClass("row");
-          b.addClass("col-1");
+          b.addClass("col-1.5");
           // assigning each save button a data-index to connect it with corresponding work hour
           b.attr("data-index", timeblocks[i].hour);
           wrap.append(b);
           
           // creating an image tag and assigning it to a variable named saveImg
           var saveImg = $("<img>");
+          // adding the class saveImg to the variable saveImg
+          saveImg.addClass("saveImg");
           // assigning save icon to the img tag, adding alt text of "Save Icon"
           saveImg.attr("src", "assets/images/save-white.png");
           saveImg.attr("alt", "Save Icon");
-          // appending save image to each button 
+          // appending the image to each button 
           b.append(saveImg);
+
+          // creating an image tag and assigning it to a variable named saveImgBlk
+          var saveImgBlk = $("<img>");
+          saveImgBlk.addClass("saveImgBlk");
+          saveImgBlk.attr("src", "assets/images/save-black.png");
+          saveImgBlk.attr("alt", "Save Icon Hover");
+          // appending the image to each button
+          b.append(saveImgBlk);
         }
       }
       // calling render function
+      
+      // WHEN I click into a time block
+      // THEN I can enter an event
+      
+      // WHEN I click the save button for that time block
+      // THEN the text for that event is saved in local storage
+
+      // function saveTasks() {
+      //   var index = $(this).attr("data-index");
+      //   var whichTask = timeblocks[index];
+      //   var newTask = $(whichTask).val()
+      //   myTasks[index] = newTask;
+      //   localStorage.setItem("Tasks", JSON.stringify(timeblocks));
+      // };
+
+
+      $(".saveBtn").on("click", function(){
+        event.stopPropagation();
+        console.log(this);
+        var index = $(this).attr("data-index");
+        var whichTask = allTodos[index];
+        var newTask = $(whichTask).val()
+        allTodos[index] = newTask;
+        localStorage.setItem("Tasks", JSON.stringify(allTodos));
+      }); 
+
+      
       renderTimeblocks();
+      // {
+      //   // logging the button I clicked on
+      //   console.log(this);
+      //   // making a var
+
+      //   // var clickSave = $(this).attr("data-index");
+      //   if ($(this).attr("data-index") === "9am") {
+      //     // console.log($("#9am").text());
+      //     var task9am = $("#9am").text();
+
+      //     timeblocks[0].tasks.value = ($("#9am").text());
+      //     localStorage.setItem("9am Task", JSON.stringify(task9am));
+      //   }
 
 
-      // hours passed should be gray
-      // current hour should be red
-      //     if(i === 12){
+      //   // else if ($(this).attr("data-index") === "9am") {
+          
+      //   // }
+      //   // else if ($(this).attr("data-index") === "10am") {
+          
+      //   // }
+      //   // else if ($(this).attr("data-index") === "11am") {
+          
+      //   // }
+      //   // else if ($(this).attr("data-index") === "12pm") {
+          
+      //   // }
+      //   // else if ($(this).attr("data-index") === "1pm") {
+          
+      //   // }
+      //   // else if ($(this).attr("data-index") === "2pm") {
+          
+      //   // }
+      //   // else if ($(this).attr("data-index") === "3pm") {
+          
+      //   // }
+      //   // else if ($(this).attr("data-index") === "4pm") {
+          
+      //   // }
+      //   // else if ($(this).attr("data-index") === "5pm") {
+          
+      //   // }
+      //   // timeblocks.tasks = textArea.textContent;
+      //   // next, add to local storage (look at array of objects timeblocks i made above, see if I can use that)
+      //   // var userInput = ... not done yet
+      //   $("#10am").on("click", function(){
+      //     console.log(this);
+      //   })
+      // });
+      
+      // WHEN I refresh the page
+      // THEN the saved events persist
+      // (local storage works properly)
+    
+
+    });
+
+    //     if(i === 12){
       //       chosenTag.css(["background-color", "red"]);
       //       chosenTag.addClass("red-class");
       //     }
       //     if((new Date()).getHours() === i){ // uses military time 0-23 for hours
       //       chosenTag.addClass("red-class");
       //     }
-      // future hours should be green
-
-      // WHEN I click into a time block
-      // THEN I can enter an event
-      // create text areas for each time-block (DONE)
-
-      // WHEN I click the save button for that time block
-      // THEN the text for that event is saved in local storage
-
-      // need an .on("click") event for save buttons (or one click event with (this))
-      $(".saveBtn").on("click", function () {
-        // logging the button I clicked on
-        console.log(this);
-        // making a variable 
-        var clickSave = $(this).attr("data-index");
-        // next, add to local storage (look at array of objects timeblocks i made above, see if I can use that)
-        // var userInput = ... not done yet
-      })
-
-      // WHEN I refresh the page
-      // THEN the saved events persist
-      // (local storage works properly)
-
-
-    });
-
 
       // in textarea associated with $(this)...using 
       // want to us (this) keyword to identify which save button you're clicking

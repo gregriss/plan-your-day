@@ -12,7 +12,8 @@ The calendar below breaks the workday into hourly time blocks, and provides a pl
 
 Click on a block to type in an item, and click the corresponding save button on the right side of the block to store what you entered. When you come back to the page, the items you've entered will still be there for your reference.
 
-## Credits
+Provided that the time is before 8am, the page will appear like so:
+![Start](assets/images/home.png)
 
 ## License 
 
