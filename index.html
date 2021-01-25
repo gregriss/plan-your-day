@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style/style.css" />
   <title>Work Day Scheduler</title>
+  <link rel="calender icon" type="image.png" href="assets/images/event-black-27x27.png">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
@@ -39,48 +40,12 @@
       // displaying current time in the currentDay paragraph 
       $("#currentDay").text(days[(new Date()).getDay()] + ", " + months[(new Date()).getMonth()] + " " + new Date().getDate());
 
-      // var myTasks = ["","","","","","","","",""];
-      // var todo9 = $("#9am").text();
-      // var todo10 = $("#10am").text();
-      // var todo11 = $("#11am").text();
-      // var todo12 = $("#12pm").text();
-      // var todo1 = $("#1pm").text();
-      // var todo2 = $("#2pm").text();
-      // var todo3 = $("#3pm").text();
-      // var todo4 = $("#4pm").text();
-      // var todo5 = $("#5pm").text();
-
-      var timeblocks = [
-        {
-          hour: "9am",
-        },
-        {
-          hour: "10am",
-        },
-        {
-          hour: "11am",
-        },
-        {
-          hour: "12pm",
-        },
-        {
-          hour: "1pm",
-        },
-        {
-          hour: "2pm",
-        },
-        {
-          hour: "3pm",
-        },
-        {
-          hour: "4pm",
-        },
-        {
-          hour: "5pm",
-        }
-      ];
-
+      
+      // array of all workday hours
+      var timeblocks = ["9am","10am","11am","12pm","1pm","2pm","3pm","4pm","5pm"];
+      // creating variable and assigning it the value of html container class 
       var container = $(".container");
+      // creating variable and assigning it the value of html saveBtn class
       var saveBtn = $(".saveBtn");
 
       // creating a variable named allTodos and assigning it an empty array where todo items will be stored
@@ -97,7 +62,7 @@
           // giving the div a class of wrap and row
           wrap.addClass("wrap");
           wrap.addClass("row");
-          wrap.addClass("data-index", timeblocks[i].hour);
+          wrap.addClass("data-index", timeblocks[i]);
           // appending the wrap divs to the larger container div
           container.append(wrap);
 
@@ -107,7 +72,7 @@
           s.addClass("row");
           s.addClass("col-1.5");
           // giving span elements the text of the workday hours
-          s.text(timeblocks[i].hour);
+          s.text(timeblocks[i]);
           // appending to the wrap div
           wrap.prepend(s);
 
@@ -145,7 +110,7 @@
           b.addClass("row");
           b.addClass("col-1.5");
           // assigning each save button a data-index to connect it with corresponding work hour
-          b.attr("data-index", timeblocks[i].hour);
+          b.attr("data-index", timeblocks[i]);
           b.attr("value", i);
           wrap.append(b);
 
@@ -171,7 +136,7 @@
           var textArea = $("<textarea>");
           textArea.addClass("row")
           textArea.addClass("col-12");
-          textArea.attr("id", timeblocks[i].hour);
+          textArea.attr("id", timeblocks[i]);
           // checking if All Todos exists yet in local storage
           if (localStorage.getItem("All Todos")) {
             // parsing local storage values 
@@ -193,20 +158,17 @@
 
       $(".saveBtn").on("click", function (event) {
         event.stopPropagation();
-        // console.log(this);
-
         var index = $(this).attr("data-index");
-        var arrayIndex = $(this).attr("value");  // getting array numbr
+        // getting array number
+        var arrayIndex = $(this).attr("value");  
         var userInput = allTodos[index];
         var newTask = $(userInput).val();
-        allTodos[arrayIndex] = $("#" + index).val(); // setting value of array to the text
-        // allTodos[i] = $("#"+ index).val();
-        console.log(allTodos[arrayIndex]);
-        console.log(allTodos);
-
-        // console.log(todo9);
-        console.log(index);
-        // localStorage.setItem(index, currentTodo);
+        // setting value of array index to the text in textarea with corresponding id (#)
+        allTodos[arrayIndex] = $("#" + index).val(); 
+        
+        // console.log(allTodos[arrayIndex]);
+        // console.log(allTodos);
+        // console.log(index);
         localStorage.setItem("All Todos", JSON.stringify(allTodos));
       });
 

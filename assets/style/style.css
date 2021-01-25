@@ -66,7 +66,7 @@ textarea{
 }
 
 .saveBtn {
-  padding: 0 3% 0 4.5%;
+  padding: 0 4%;
   width: 11%;
   border-left: 1px solid black;
   border-top-right-radius: 15px;
@@ -75,16 +75,16 @@ textarea{
   color: white;
   align-items: center;
   z-index: 1;
+  transition: all .3s ease-in-out;
 }
 
-.saveBtn i:hover {
-  font-size: 20px;
-  transition: all .3s ease-in-out;
+.saveBtn:hover {
+  background-color: #17BD8B;
 }
 
 .saveImg {
   position: absolute;
-  transition: all .3s ease-in-out;
+  transition: all .25s ease-in-out;
 }
 
 .saveImg:hover {
