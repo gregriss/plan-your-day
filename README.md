@@ -8,6 +8,8 @@ At the top of the page, you will find the application title as well as today's d
 
 The calendar below breaks the workday into hourly time blocks, and provides a place to store tasks, events, and notes within each block. Hours which have passed are colored gray, the current hour is red, and future hours are green.
 
+I used HTML, CSS, JavaScript, and jQuery to build this project.
+
 ## Usage
 
 Click on a block to type in an item, and click the corresponding save button on the right side of the block to store what you entered. When you come back to the page, the items you've entered will remain there for your convenience. Check out the deployed page here: 
