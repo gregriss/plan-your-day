@@ -4,7 +4,7 @@ body {
   line-height: 1;
 }
 
-textarea{
+textarea {
   background: transparent;
   border: none;
   resize: none;
@@ -22,14 +22,15 @@ textarea{
   border-bottom: 10px solid black;
 }
 
-.description{
+.description {
   white-space: pre-wrap;
 }
 
-.time-block{
+.time-block {
   text-align: center;
   border-radius: 2px 15px 15px 2px;
   margin-left: 4px;
+  box-shadow: 1px 1px 5px 2px darkgray;
 }
 
 .row {
@@ -55,6 +56,10 @@ textarea{
   color: white;
 }
 
+.past:checked {
+  background-color: #e4e2e2;
+}
+
 .present {
   background-color: #ff6961;
   color: white;
@@ -72,6 +77,7 @@ textarea{
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: #06AED5;
+  box-shadow: 1px 1px 5px 2px darkgray;
   color: white;
   align-items: center;
   z-index: 1;
