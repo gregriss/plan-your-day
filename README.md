@@ -22,6 +22,7 @@ Between 2pm and 3pm, when you've entered several items, clicked save, and refres
 ![In-Use](assets/images/planner-in-use.png)
 
 ## License 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Copyright (c) [2021] [Greg Riss]
 
